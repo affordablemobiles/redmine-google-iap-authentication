@@ -12,6 +12,7 @@ module GoogleIAP
                     logger.info("  IAP Login for : #{emailaddress} (id=#{su.id})") if logger
                     user = su
                 else
+                    logger.error("  Failed IAP Login for : #{emailaddress} (not found)") if logger
                     render_error :message => 'Automatic Login User Not Found', :status => 403
                 end
             end
