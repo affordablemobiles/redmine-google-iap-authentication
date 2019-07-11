@@ -41,6 +41,8 @@ module GoogleIAP
             # store current ip address in user object ephemerally
             user.remote_ip = request.remote_ip if user
 
+            user.update_last_login_on!
+
             user
         end
   
