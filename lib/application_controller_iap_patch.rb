@@ -7,6 +7,8 @@ module GoogleIAP
             user = nil
 
             if (emailaddress = request.headers["X-Goog-Authenticated-User-Email"].to_s.presence)
+                emailaddress.sub! 'accounts.google.com:', ''
+                
                 su = User.find_by_mail(emailaddress)
                 if su && su.active?
                     logger.info("  IAP Login for : #{emailaddress} (id=#{su.id})") if logger
