@@ -14,16 +14,17 @@ module GoogleIAP
                     logger.info("  IAP Login for : #{emailaddress} (id=#{su.id})") if logger
                     user = su
                 else
-                    attrs = {
-                        :login => emailaddress,
-                        :firstname => emailaddress.split('@')[0],
-                        :lastname => emailaddress.split('@')[1],
-                        :mail => emailaddress,
-                        :language => Setting.default_language
-                    }
+                    emailsplit = emailaddress.split('@')
 
-                    user = new User(attrs)
+                    user = User.new
+                    user.login = emailaddress
+                    user.firstname = emailsplit[0]
+                    user.lastname = emailsplit[1]
+                    user.mail = emailaddress
+                    user.language = Setting.default_language
+                    user.admin = false
 
+                    user.register
                     user.activate
 
                     if user.save
