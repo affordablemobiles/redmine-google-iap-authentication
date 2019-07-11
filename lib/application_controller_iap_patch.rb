@@ -10,9 +10,14 @@ module GoogleIAP
                 emailaddress.sub! 'accounts.google.com:', ''
 
                 su = User.find_by_mail(emailaddress)
-                if su && su.active?
-                    logger.info("  IAP Login for : #{emailaddress} (id=#{su.id})") if logger
-                    user = su
+                if su
+                    if su.active?
+                        logger.info("  IAP Login for : #{emailaddress} (id=#{su.id})") if logger
+                        user = su
+                    else
+                        logger.info("  IAP Login failed (NOT ACTIVE) : #{emailaddress} (id=#{su.id})") if logger
+                        render_error :message => 'IAP Automatic Login Failed - Login Blocked', :status => 403
+                    end
                 else
                     emailsplit = emailaddress.split('@')
 
