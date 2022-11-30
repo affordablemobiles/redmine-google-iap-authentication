@@ -1,1 +1,0 @@
-gem 'redmine_google_iap_authentication'
