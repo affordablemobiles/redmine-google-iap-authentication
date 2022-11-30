@@ -1,5 +1,5 @@
 require 'redmine'
-require 'application_controller_iap_patch'
+require File.dirname(__FILE__) + '/lib/application_controller_iap_patch'
 
 Redmine::Plugin.register :redmine_google_iap do
   name 'Google IAP Authentication'
