@@ -14,5 +14,5 @@ Redmine::Plugin.register :redmine_google_iap do
 end
 
 RedmineApp::Application.config.after_initialize do
-    ApplicationController.prepend(GoogleIAP::ApplicationIAPAuthPatch)
+    ApplicationController.prepend(ApplicationControllerIapPatch)
 end
